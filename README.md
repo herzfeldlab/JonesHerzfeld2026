@@ -16,15 +16,6 @@ decide, for each candidate, whether it is or is not an action potential,
 grounded in a truth about what an action potential actually is, rather
 than in an arbitrary amplitude cutoff.
 
-That truth is this: an extracellular action potential has
-stereotyped temporal dynamics, resulting in a smooth trajectory through phase
-space, rather than a jagged or wandering one. That coherence is a
-physical property of the spike itself, not an artifact of any particular
-recording setup or sorter, which is what makes it a principled basis for
-curation rather than another convention. Waveform curvature is one
-direct, minimal way to measure it. It is not the only way, and it is
-offered here as a starting point: a simple, white-box solution
-that other more elaborate measures can build on.
 
 ## The problem
 
