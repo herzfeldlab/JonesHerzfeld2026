@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waveform-curvature"
+dynamic = ["version"]
+description = "Principled curation of singular spikes in extracellular recordings."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Herzfeld Lab" }]
+dependencies = ["numpy>=1.21"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+experiments = ["spikeinterface", "spikeforest", "mountainsort5", "matplotlib"]
+
+[project.urls]
+Homepage = "https://github.com/herzfeldlab/JonesHerzfeld2026"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+py-modules = ["waveform_curvature"]
+
+[tool.setuptools.dynamic]
+version = { attr = "waveform_curvature.__version__" }
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
