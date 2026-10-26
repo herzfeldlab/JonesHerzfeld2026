@@ -1,7 +1,6 @@
 # Waveform Curvature (v1)
 
 Principled curation of singular spikes in extracellular recordings.
-
 (Jones & Herzfeld, 2026)
 
 ## Purpose
