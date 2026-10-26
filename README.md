@@ -99,6 +99,8 @@ waveform_curvature(waveform, delay=2, dim=None)
 
 Curvature for one `(n_samples,)` waveform, or an array of scores for a `(n_candidates, n_samples)` batch. `delay` and `dim` set the embedding; by default `delay=2` and `dim=n_samples // 4`.
 
+![Word Cloud Visualization](assets/tuning.png)
+
 ```
 turn_angles(waveform, delay=2, dim=None)
 ```
