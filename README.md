@@ -112,7 +112,9 @@ Scores both pools, sets a cutoff from the noise pool, and returns `(keep, scores
 
 ## Experiments
 
-*UNDER CONSTRUCTION* `experiments/` has the scripts used to evaluate curvature on real SpikeForest recordings. See `experiments/README.md`.
+*UNDER CONSTRUCTION* 
+
+`experiments/` will have the scripts used to evaluate curvature on ground-truth SpikeForest recordings. See `experiments/README.md`.
 
 ![Word Cloud Visualization](assets/exp-1.png)
 
