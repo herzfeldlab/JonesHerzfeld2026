@@ -26,6 +26,8 @@ curvature = 1 - mean(turn_angle) / pi
 
 At each interior point of the trajectory, the turn angle is the angle between the incoming and outgoing step vectors, computed with a dot product. A straight run has a turn angle near 0 (curvature near 1). A trajectory that keeps reversing on itself has a turn angle near pi (curvature near 0). Real spikes sit in a consistent, separable range because their dynamics are consistent; noise does not.
 
+![Word Cloud Visualization](assets/wc-viz.png)
+
 ## Why this is a white-box solution
 
 There's no model to train and no black box to trust. The score is a closed-form geometric quantity computed directly from the voltage trace, so a threshold on it is a criterion you can state, defend, and report: "an event was classified as a spike if it scored greater than __% of the underlying noise distribution."
@@ -110,7 +112,9 @@ Scores both pools, sets a cutoff from the noise pool, and returns `(keep, scores
 
 ## Experiments
 
-`experiments/` has the scripts used to evaluate curvature on real SpikeForest recordings. See `experiments/README.md`.
+*UNDER CONSTRUCTION* `experiments/` has the scripts used to evaluate curvature on real SpikeForest recordings. See `experiments/README.md`.
+
+![Word Cloud Visualization](assets/exp-1.png)
 
 ## Tests
 
