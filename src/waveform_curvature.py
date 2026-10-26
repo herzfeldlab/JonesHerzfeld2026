@@ -1,4 +1,4 @@
-"""Waveform curvature: a noise-calibrated smoothness filter for spike candidates."""
+"""Waveform curvature (v1)"""
 import numpy as np
 
 __version__ = "0.1.0"
