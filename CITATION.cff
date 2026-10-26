@@ -2,7 +2,10 @@ cff-version: 1.2.0
 message: If you use this software, please cite it as below.
 title: Waveform Curvature
 authors:
+  - given-names: Max Otto
+  - given-names: David J.
   - family-names: Jones
   - family-names: Herzfeld
 repository-code: https://github.com/herzfeldlab/JonesHerzfeld2026
+date: 2026
 license: MIT
