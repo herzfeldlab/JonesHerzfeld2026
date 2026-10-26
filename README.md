@@ -54,7 +54,7 @@ We encourage researchers to choose a relatively low detection threshold to maxim
 ## Install
 
 ```
-pip install git+https://github.com/herzfeldlab/JonesHerzfeld2026.git
+pip install git+https://github.com/herzfeldlab/WaveformCurvature.git
 ```
 
 Requires Python 3.9+ and numpy. The tool is a single file, `src/waveform_curvature.py`, so you can also copy it straight into your project.
