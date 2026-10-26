@@ -1,4 +1,4 @@
-# Waveform Curvature
+# Waveform Curvature (v1)
 
 Principled curation of singular spikes in extracellular recordings.
 
@@ -6,13 +6,13 @@ Principled curation of singular spikes in extracellular recordings.
 
 Deciding whether an extracellular event is a spike or an artifact is one of the most basic, unavoidable steps in every spike sorting pipeline, and it is currently solved by convention rather than by principle. Most labs pick an amplitude threshold that "looks right," tune it by trial and error against a sorter's output, and accept whatever spikes that threshold happens to miss.
 
-This tool exists to give researchers a principled alternative: a way to decide, for each candidate, whether it is or is not an action potential, grounded in a truth about what an action potential actually is, rather than in an arbitrary amplitude cutoff.
+This tool exists to give researchers a principled alternative: a way to decide, for each candidate, whether it is or is not an action potential, grounded in a physical truth about what an action potential is, rather than in an arbitrary amplitude cutoff.
 
 ## The problem
 
-Spike detection forces a tradeoff. Set your threshold high and you get clean, obviously-spike-shaped candidates, but you miss real spikes that happen to be smaller or partially overlapping. Set it low and you catch those spikes, but you flood your sorter with noise crossings that were never action potentials at all. Most pipelines resolve this by picking a threshold that's higher than it should be, and quietly accepting the missed spikes as a cost of doing business.
+Spike detection forces a tradeoff. Set your threshold high and you get clean, obviously-spike-shaped candidates, but you miss real spikes that happen to be smaller or partially overlapping. Set it low and you catch those spikes, but you flood your sorter with noise crossings. Most pipelines resolve this by picking a threshold that's higher than it should be, and quietly accepting the missed spikes as a cost of doing business.
 
-Waveform curvature is a way out of that tradeoff. It lets you set a low detection threshold on purpose, catching everything that might be a spike, and then curate that candidate pool with a second, independent criterion: does the waveform actually look like a spike.
+Waveform curvature is a way out of that tradeoff. It lets you set a low detection threshold on purpose, catching everything that might be a spike, and then curate that candidate pool with a second, independent and principled criterion.
 
 ## The idea
 
@@ -28,24 +28,25 @@ At each interior point of the trajectory, the turn angle is the angle between th
 
 ## Why this is a white-box solution
 
-There's no model to train and no black box to trust. The score is a closed-form geometric quantity computed directly from the waveform's shape, so a threshold on it is a criterion you can state, defend, and report: "candidates were kept if their trajectory through phase space had a mean turn angle below X." Any researcher can look at the formula and understand exactly why a given candidate was kept or dropped.
+There's no model to train and no black box to trust. The score is a closed-form geometric quantity computed directly from the voltage trace, so a threshold on it is a criterion you can state, defend, and report: "an event was classified as a spike if it scored greater than __% of the underlying noise distribution."
 
-It's also cheap. It's a handful of numpy operations per waveform, with no dependencies beyond numpy, and it drops into any pipeline as a pre-sorting filter, independent of whatever sorter you use downstream.
+A first-principles approach comes with several benefits: it does not require a-priori specification of amplitude or unit template, and is simple and lightweight to compute. Thus, it drops into any pipeline as a pre-sorting filter, independent of whatever sorter you use downstream.
+
 
 ## How the threshold is calibrated
 
-The cutoff is not chosen by eye. It's calibrated directly from your own recording's noise:
+The threshold is calibrated directly from your own recording's noise:
 
 1. Pull a pool of noise snippets, windows that did not cross your detection threshold, from the same recording.
 2. Score every noise snippet's curvature.
 3. Set the cutoff so that a chosen percentage of noise (for example 5%) scores above it, i.e. at the 95th percentile of the noise scores.
 4. Keep only candidates whose curvature exceeds that cutoff.
 
-Because the cutoff sits at a percentile of the noise distribution itself, it comes with a concrete, interpretable guarantee: by construction, only about that percentage of pure noise would pass the filter by chance. That's a real false-positive rate you can report, not an arbitrary number picked by eye. It also means the cutoff adapts automatically to each recording, since noise characteristics drift across sessions, probes, and preparations.
+Because the cutoff sits at a percentile of the noise distribution itself, by construction, only about that percentage of pure noise would pass the filter by chance. This creates a reportable false-positive rate. It also means the cutoff adapts automatically to each recording, since noise characteristics drift across sessions, probes, and preparations.
 
 ## Recommended detection threshold
 
-Because curation happens after detection, you're free to lower your detection threshold. We encourage researchers to do exactly that: choose a relatively low detection threshold to maximize sensitivity (catch every plausible spike, including small ones), and let curvature handle specificity (reject the ones that don't have spike-like dynamics). This decouples the two halves of the sensitivity/specificity tradeoff instead of forcing one detection threshold to do both jobs at once.
+We encourage researchers to choose a relatively low detection threshold to maximize sensitivity (catch every plausible spike), and let curvature handle specificity (reject events that don't have spike-like dynamics). This decouples the two halves of the sensitivity/specificity tradeoff instead of forcing one detection threshold to do both jobs at once.
 
 ## Install
 
