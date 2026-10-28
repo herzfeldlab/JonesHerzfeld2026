@@ -17,7 +17,7 @@ dev = ["pytest"]
 experiments = ["spikeinterface", "spikeforest", "mountainsort5", "matplotlib"]
 
 [project.urls]
-Homepage = "https://github.com/herzfeldlab/JonesHerzfeld2026"
+Homepage = "https://github.com/herzfeldlab/WaveformCurvature"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
