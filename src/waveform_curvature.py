@@ -61,7 +61,7 @@ def waveform_curvature(waveform, delay=2, dim=None, chunk=4096):
     return scores[0] if single else scores
 
 
-def calibrate_and_filter(candidate_waveforms, noise_waveforms, percentile=2.0, delay=2, dim=None):
+def calibrate_and_filter(candidate_waveforms, noise_waveforms, percentile=10.0, delay=2, dim=None):
     """Keep candidates whose curvature beats a cutoff set from noise.
 
     `percentile` is the share of pure noise (in %) allowed to pass; lower is
